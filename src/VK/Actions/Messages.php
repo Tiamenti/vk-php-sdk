@@ -721,4 +721,19 @@ class Messages {
 	public function unpin($access_token, array $params = []) {
 		return $this->request->post('messages.unpin', $access_token, $params);
 	}
+
+    /**
+     * @param string $access_token
+     * @param array $params
+     * - @var string event_id
+     * - @var string user_id
+     * - @var string peer_id
+     * - @var string event_data
+     * @throws VKClientException
+     * @throws VKApiException
+     * @return mixed
+     */
+    public function sendMessageEventAnswer($access_token, array $params = []) {
+        return $this->request->post('messages.sendMessageEventAnswer', $access_token, $params);
+    }
 }
