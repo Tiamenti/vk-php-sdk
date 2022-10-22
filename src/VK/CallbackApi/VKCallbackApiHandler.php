@@ -4,6 +4,7 @@ namespace VK\CallbackApi;
 
 abstract class VKCallbackApiHandler {
     protected const CALLBACK_EVENT_MESSAGE_NEW = 'message_new';
+    protected const CALLBACK_EVENT_MESSAGE_EVENT = 'message_event';
     protected const CALLBACK_EVENT_MESSAGE_REPLY = 'message_reply';
     protected const CALLBACK_EVENT_MESSAGE_ALLOW = 'message_allow';
     protected const CALLBACK_EVENT_MESSAGE_DENY = 'message_deny';
@@ -47,6 +48,13 @@ abstract class VKCallbackApiHandler {
      * @param array $object
      */
     public function messageNew(int $group_id, ?string $secret, array $object) {}
+
+    /**
+     * @param int $group_id
+     * @param null|string $secret
+     * @param array $object
+     */
+    public function messageEvent(int $group_id, ?string $secret, array $object) {}
 
     /**
      * @param int $group_id
@@ -310,6 +318,9 @@ abstract class VKCallbackApiHandler {
         switch ($type) {
             case static::CALLBACK_EVENT_MESSAGE_NEW:
                 $this->messageNew($group_id, $secret, $object);
+                break;
+            case static::CALLBACK_EVENT_MESSAGE_EVENT:
+                $this->messageEvent($group_id, $secret, $object);
                 break;
             case static::CALLBACK_EVENT_MESSAGE_REPLY:
                 $this->messageReply($group_id, $secret, $object);
